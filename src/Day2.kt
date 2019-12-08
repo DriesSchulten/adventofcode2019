@@ -2,7 +2,8 @@ fun part1(output: MutableList<Int>) {
   output[1] = 12
   output[2] = 2
 
-  println(run(output))
+  IntCode.run(output)
+  println(output[0])
 }
 
 fun part2(output: MutableList<Int>) {
@@ -13,34 +14,13 @@ fun part2(output: MutableList<Int>) {
       memory[1] = noun
       memory[2] = verb
 
-      val result = run(memory)
+      IntCode.run(memory)
 
-      if (result == 19690720) {
+      if (memory[0] == 19690720) {
         println(100 * noun + verb)
       }
     }
   }
-}
-
-fun run(output: MutableList<Int>): Int {
-  var pos = 0
-  var opcode = output[pos]
-
-  while (opcode != 99) {
-    val target = output[pos + 3]
-    val noun = output[output[pos + 1]]
-    val verb = output[output[pos + 2]]
-
-    when (opcode) {
-      1 -> output[target] = noun + verb
-      2 -> output[target] = noun * verb
-    }
-
-    pos += 4
-    opcode = output[pos]
-  }
-
-  return output[0]
 }
 
 fun main() {

@@ -15,3 +15,4 @@ object Helpers {
 }
 
 fun List<String>.intList(): List<Int> = this.map { it.toInt() }
+
